@@ -5,20 +5,31 @@ const webpack = require("webpack"); // to access built-in plugins
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 
+const Manifest = require("./src/public/manifest.json");
 const srcPath = "src";
 const devMode = process.env.NODE_ENV !== "production";
 
 module.exports = {
-  entry: path.resolve(__dirname, srcPath, "index.js"),
+  entry: path.resolve(__dirname, srcPath, "index.tsx"),
   resolve: {
-    extensions: [".js", ".scss"]
+    extensions: [".ts", ".tsx", ".js", "scss"]
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
+        enforce: "pre",
+        use: [
+          {
+            loader: "tslint-loader",
+            options: {}
+          }
+        ]
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)?$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"]
+        loader: "babel-loader"
       },
       {
         test: /\.scss$/,
@@ -53,19 +64,7 @@ module.exports = {
         : "static/css/[id].[Chunkhash].chunk.css"
     }),
     new ManifestPlugin({
-      seed: {
-        icons: [
-          {
-            src: "favicon.ico",
-            sizes: "64x64 32x32 24x24 16x16",
-            type: "image/x-icon"
-          }
-        ],
-        start_url: ".",
-        display: "standalone",
-        theme_color: "#000000",
-        background_color: "#000000"
-      }
+      seed: Manifest
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
