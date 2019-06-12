@@ -12,8 +12,8 @@ module.exports = merge(common, {
     mode: "production",
     output: {
         publicPath: "/", // if you don't put the "/" here, you get this error: "bundle.js:1 Uncaught SyntaxError: Unexpected token <"
-        filename: "static/js/[name].[hash].bundle.js",
-        chunkFilename: "static/js/[name].[hash].bundle.js",
+        filename: "static/js/[name].[chunkhash].bundle.js",
+        chunkFilename: "static/js/[name].[chunkhash].bundle.chunk.js", // lazy loading routes
         path: paths.dist,
     },
     optimization: {
@@ -37,7 +37,7 @@ module.exports = merge(common, {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: "static/css/[name].[contenthash].css",
-            chunkFilename: "static/css/[id].[contenthash].css",
+            chunkFilename: "static/css/[id].[contenthash].chunk.css",
         }),
 
         new CleanWebpackPlugin([paths.dist], {

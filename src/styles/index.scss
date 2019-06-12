@@ -1,4 +1,5 @@
-#app {
-  background-attachment: fixed;
-  display: flex;
-}
+@import "./base/main.scss";
+
+@import "./modules/main.scss";
+
+@import "./pages/main.scss";
