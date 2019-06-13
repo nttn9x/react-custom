@@ -1,0 +1,19 @@
+@import "../../../styles/base/border.scss";
+@import "../../../styles/base/background-color.scss";
+
+$background-color-gray-800: #424242;
+
+.login {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $background-color-gray-800;
+
+  .login__form {
+    width: 400px;
+    height: 480px;
+    border: 1px solid $background-color-light;
+    border-radius: $border-component;
+  }
+}

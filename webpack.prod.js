@@ -27,8 +27,18 @@ module.exports = merge(common, {
         rules: [
             {
                 // build scss to css
-                test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader", "postcss-loader"],
+                test: /\.(scss|css)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: "css-loader",
+                        options: {
+                            modules: true, // able to import file .scss | add declaration.d.ts | className={style.??}
+                        },
+                    },
+                    "sass-loader",
+                    "postcss-loader",
+                ],
             },
         ],
     },

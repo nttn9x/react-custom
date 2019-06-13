@@ -53,35 +53,3 @@
     transition: none !important;
   }
 }
-
-@keyframes animation-fade-opacity {
-  0% {
-    opacity: 0.1;
-  }
-  25% {
-    opacity: 0.25;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  75% {
-    opacity: 0.75;
-  }
-  100% {
-    opacity: 1.2;
-  }
-}
-
-@keyframes animation-shine {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  20%,
-  100% {
-    opacity: 0;
-    transform: skewX(-30deg) translate(600px, 0);
-  }
-}

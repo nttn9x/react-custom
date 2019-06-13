@@ -79,5 +79,6 @@ module.exports = {
     devServer: {
         contentBase: paths.dist,
         historyApiFallback: true, //The HTML5 History API gives developers the ability to modify a website's URL without a full page refresh
+        compress: true,
     },
 };
