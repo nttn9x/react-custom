@@ -1,4 +1,6 @@
 @import "../../../styles/base/border.scss";
+@import "../../../styles/base/palette.scss";
+@import "../../../styles/base/padding.scss";
 @import "../../../styles/base/background-color.scss";
 
 $background-color-gray-800: #424242;
@@ -12,8 +14,36 @@ $background-color-gray-800: #424242;
 
   .login__form {
     width: 400px;
-    height: 480px;
+    height: 308px;
     border: 1px solid $background-color-light;
     border-radius: $border-component;
+    padding: $padding-inside-component;
+
+    h1 {
+      text-align: center;
+    }
+
+    &__field {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        height: 30px;
+        line-height: 30px;
+        color: $primary-color-text;
+      }
+
+      input {
+        height: 30px;
+      }
+    }
+
+    &__field:nth-child(3) {
+      margin-top: 35px;
+    }
+
+    button {
+      margin-top: 35px;
+    }
   }
 }

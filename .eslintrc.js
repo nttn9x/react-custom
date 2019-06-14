@@ -20,6 +20,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/interface-name-prefix": "off",
+    "react/prop-types": "off",
   },
   settings: {
     react: {

@@ -1,28 +1,40 @@
 import React, { useMemo } from "react";
 
+import Button from "@material-ui/core/Button";
+
 import LayoutComponent from "./login-layout.component";
 import InputComponent from "./login-input.component";
 
-import { useFormInput, IFormInput } from "./login.use";
+import { useRedux } from "./login.use";
+
+import { useTranslation } from "react-i18next";
 
 const Login: React.FC = () => {
-  const usename: IFormInput = useFormInput();
-  const password: IFormInput = useFormInput();
+  // const usename: IFormInput = useFormInput();
+  // const password: IFormInput = useFormInput();
+
+  const [state, actions] = useRedux();
+
+  const { t } = useTranslation(["common"]);
 
   return (
     <LayoutComponent>
+      <h1>HELLO</h1>
       {useMemo(
         () => (
-          <InputComponent {...usename} />
+          <InputComponent label={t("username")} value={state.username} onChange={actions.changeUsername} />
         ),
-        [usename.value],
+        [state.username],
       )}
       {useMemo(
         () => (
-          <InputComponent {...password} />
+          <InputComponent label={t("password")} value={state.password} onChange={actions.changePassword} />
         ),
-        [password.value],
+        [state.password],
       )}
+      <Button variant="contained" color="primary" fullWidth={true}>
+        Login
+      </Button>
     </LayoutComponent>
   );
 };

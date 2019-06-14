@@ -1,19 +1,45 @@
-import { useState } from "react";
+import { useReducer } from "react";
+import { ChangeEvent } from "react";
 
-export interface IFormInput {
-  value: string;
-  onChange: any;
+const CHANGE_USERNAME = "change_username";
+const CHANGE_PASSWORD = "change_password";
+
+interface IState {
+  username: string;
+  password: string;
+  isLogging: boolean;
 }
 
-export function useFormInput(initValue: string = ""): IFormInput {
-  const [value, setValue] = useState(initValue);
+type TAction =
+  | { type: typeof CHANGE_USERNAME; payload: { value: string } }
+  | { type: typeof CHANGE_PASSWORD; payload: { value: string } };
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
-    setValue(e.target.value);
+const initState: IState = {
+  username: "",
+  password: "",
+  isLogging: false,
+};
+
+const loginReducer = (state: IState, { type, payload }: TAction): IState => {
+  switch (type) {
+    case CHANGE_USERNAME:
+      return { ...state, username: payload.value };
+    case CHANGE_PASSWORD:
+      return { ...state, password: payload.value };
+    default:
+      return state;
   }
+};
 
-  return {
-    value,
-    onChange: handleChange,
+export const useRedux = (): [IState, any] => {
+  const [state, dispatch] = useReducer(loginReducer, initState);
+
+  const actions: any = {
+    changeUsername: (e: ChangeEvent<HTMLInputElement>) =>
+      dispatch({ type: CHANGE_USERNAME, payload: { value: e.target.value } }),
+    changePassword: (e: ChangeEvent<HTMLInputElement>) =>
+      dispatch({ type: CHANGE_PASSWORD, payload: { value: e.target.value } }),
   };
-}
+
+  return [state, actions];
+};
