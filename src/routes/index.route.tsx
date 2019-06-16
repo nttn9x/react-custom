@@ -8,7 +8,7 @@ import PublicTypeRoute from "./types/public.type.route";
 
 import LayoutComponent from "../component/layout/layout.component";
 
-const Root: React.SFC = () => {
+const Root: React.FC = () => {
   return (
     <LayoutComponent>
       <Router>
