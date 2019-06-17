@@ -1,11 +1,11 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect } from "react";
 
 import Button from "@material-ui/core/Button";
 
 import LayoutComponent from "./login-layout.component";
 import InputComponent from "./login-input.component";
 
-import { useRedux, useFieldInput } from "./login.hook";
+import { useFormInput, useButton } from "./login.hook";
 
 import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
@@ -16,29 +16,35 @@ interface ILoginProps {
 }
 
 const Login: React.FC<ILoginProps> = ({ history }) => {
-  const [state, actions] = useRedux(history);
-  const { username, password, isLogin } = state;
-
-  useFieldInput();
+  const username = useFormInput();
+  const password = useFormInput();
+  const button = useButton(history);
 
   const { t } = useTranslation(["common"]);
+
+  useEffect(() => {
+    const node = document.getElementById("ip-username");
+    if (node) {
+      node.focus();
+    }
+  }, []);
 
   return (
     <LayoutComponent>
       <h1>HELLO</h1>
       {useMemo(
         () => (
-          <InputComponent id={"ip-username"} label={t("username")} value={username} onChange={actions.changeUsername} />
+          <InputComponent id={"ip-username"} label={t("username")} {...username} />
         ),
-        [state.username],
+        [username.value],
       )}
       {useMemo(
         () => (
-          <InputComponent label={t("password")} value={password} onChange={actions.changePassword} />
+          <InputComponent label={t("password")} {...password} />
         ),
-        [state.password],
+        [password.value],
       )}
-      <Button disabled={isLogin} variant="contained" fullWidth={true} onClick={actions.doLogin}>
+      <Button disabled={button.isProcessing} variant="contained" fullWidth={true} onClick={button.onClick}>
         Login
       </Button>
     </LayoutComponent>
