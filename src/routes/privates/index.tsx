@@ -7,7 +7,8 @@ const About = lazy(() => import("../../pages/private/about/about.component"));
 
 const routes: RouteProps[] = [
   {
-    path: "/home",
+    path: "/",
+    exact: true,
     component: Home,
   },
   {

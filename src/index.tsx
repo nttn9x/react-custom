@@ -5,6 +5,7 @@ import "./styles/index.scss";
 import React from "react";
 import ReactDOM from "react-dom";
 import Route from "./routes/index.route";
+
 import "./i18n";
 
 function generateUI(): void {
@@ -16,5 +17,9 @@ function generateUI(): void {
   ReactDOM.render(<Route />, root);
 }
 
+function createMagic() {
+  generateUI();
+}
+
 // this is a magic
-generateUI();
+createMagic();
