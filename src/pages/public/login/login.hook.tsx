@@ -28,7 +28,7 @@ export function useButton(
 
       dispatch({ type: "SET_USER", payload: { username: "nguyenntt", fullname: "Nguyen TT Nguyen" } });
 
-      history.push("/home");
+      history.push("/");
     }, 2000);
   }
 

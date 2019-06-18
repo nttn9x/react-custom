@@ -1,8 +1,27 @@
-import { fromJS } from "immutable";
+import { Record } from "immutable";
 
 const SET_USER = "SET_USER";
 
-const initialState = fromJS({ username: "", fullname: "" });
+interface AuthProps {
+  username: string;
+  fullname: string;
+}
+
+const authRecord: AuthProps = {
+  username: "",
+  fullname: "",
+};
+
+class AuthState extends Record(authRecord) implements AuthProps {
+  public readonly username!: string;
+  public readonly fullname!: string;
+
+  constructor(params?: AuthProps) {
+    params ? super(params) : super();
+  }
+}
+
+const initialState = new AuthState({ username: "", fullname: "" });
 
 export interface SetUserAction {
   type: typeof SET_USER;
@@ -13,7 +32,7 @@ export interface SetUserAction {
 
 type AuthTypes = SetUserAction;
 
-export function auth(state = initialState, action: AuthTypes) {
+export function auth(state = initialState, action: AuthTypes): AuthState {
   switch (action.type) {
     case SET_USER: {
       return state.merge({
