@@ -1,26 +1,13 @@
-import { fromJS } from "immutable";
+const auth = {
+  isAuthenticated: false,
+  authenticate(cb: any) {
+    this.isAuthenticated = true;
+    setTimeout(cb, 100); // fake async
+  },
+  signout(cb: any) {
+    this.isAuthenticated = false;
+    setTimeout(cb, 100);
+  },
+};
 
-const SET_USER = "SET_USER";
-
-const initialState = fromJS({ username: "", fullname: "" });
-
-export interface SetUserAction {
-  type: typeof SET_USER;
-  payload: {
-    username: string;
-  };
-}
-
-type AuthTypes = SetUserAction;
-
-export function auth(state = initialState, action: AuthTypes) {
-  switch (action.type) {
-    case SET_USER: {
-      return state.merge({
-        ...action.payload,
-      });
-    }
-    default:
-      return state;
-  }
-}
+export default auth;

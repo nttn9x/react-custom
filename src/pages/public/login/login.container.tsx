@@ -10,7 +10,6 @@ import { useFormInput, useButton } from "./login.hook";
 import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
-import { useDispatch } from "react-redux";
 
 interface ILoginProps {
   history: History;
@@ -19,8 +18,7 @@ interface ILoginProps {
 const Login: React.FC<ILoginProps> = ({ history }) => {
   const username = useFormInput();
   const password = useFormInput();
-  const dispatch = useDispatch();
-  const button = useButton(history, dispatch);
+  const button = useButton(history);
 
   const { t } = useTranslation(["common"]);
 

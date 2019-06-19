@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { ChangeEvent } from "react";
 import { History } from "history";
-import { Dispatch } from "redux";
-import { SetUserAction } from "../../../store/auth.reducer";
+import AuthReducer from "../../../store/auth.reducer";
 
 export function useFormInput(initialValue?: string): { value: string; onChange: any } {
   const [value, setValue] = useState(initialValue || "");
@@ -14,10 +13,7 @@ export function useFormInput(initialValue?: string): { value: string; onChange: 
   return { value, onChange: handleChange };
 }
 
-export function useButton(
-  history: History,
-  dispatch: Dispatch<SetUserAction>,
-): { isProcessing: boolean; onClick: any } {
+export function useButton(history: History): { isProcessing: boolean; onClick: any } {
   const [isProcessing, setProcessing] = useState(false);
 
   function handleClick() {
@@ -26,9 +22,7 @@ export function useButton(
     setTimeout(() => {
       setProcessing(false);
 
-      dispatch({ type: "SET_USER", payload: { username: "nguyenntt", fullname: "Nguyen TT Nguyen" } });
-
-      history.push("/home");
+      AuthReducer.authenticate(() => history.push("/"));
     }, 2000);
   }
 

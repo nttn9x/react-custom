@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
-// import { isAccesTokenStillAlive } from "../../utils/Authentication";
+import AuthReducer from "../../store/auth.reducer";
 
 const PrivateRoute: React.SFC<RouteProps> = ({ component: Component, routes, ...rest }: any) => (
   <Route
     {...rest}
     render={props => {
-      if (true) {
+      if (!AuthReducer.isAuthenticated) {
         return (
           <Redirect
             to={{
