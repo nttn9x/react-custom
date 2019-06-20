@@ -11,6 +11,9 @@ import { useTranslation } from "react-i18next";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
+import AuthReducer from "../../../store/auth.reducer";
+import { Redirect } from "react-router-dom";
+
 interface ILoginProps {
   history: History;
 }
@@ -21,6 +24,16 @@ const Login: React.FC<ILoginProps> = ({ history }) => {
   const button = useButton(history);
 
   const { t } = useTranslation(["common"]);
+
+  if (AuthReducer.isAuthenticated) {
+    return (
+      <Redirect
+        to={{
+          pathname: "/",
+        }}
+      />
+    );
+  }
 
   useEffect(() => {
     const node = document.getElementById("ip-username");

@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { RouteProps } from "react-router-dom";
 
-const Home = lazy(() => import("../../pages/private/home/home.component"));
+const Home = lazy(() => import("../../pages/private/home/home.container"));
 
 const About = lazy(() => import("../../pages/private/about/about.component"));
 
